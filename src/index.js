@@ -1,18 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-import './index.css';
-import App from './components/App';
+import { BrowserRouter, Route } from "react-router-dom";
+
+import "./index.css";
 import reducers from "./reducers";
-import registerServiceWorker from './registerServiceWorker';
+
+import PostsIndex from "./components/PostsIndex";
+
+import registerServiceWorker from "./registerServiceWorker";
 
 ReactDOM.render(
-    <Provider store={createStore(reducers)}>
-        <App />
-    </Provider>, 
-    document.getElementById('root')
+  <Provider store={createStore(reducers)}>
+    <BrowserRouter>
+      <div>
+        <Route path="/" component={PostsIndex} />
+      </div>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
 );
 registerServiceWorker();
