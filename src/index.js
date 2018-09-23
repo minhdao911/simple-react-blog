@@ -12,6 +12,7 @@ import reducers from "./reducers";
 
 import PostsIndex from "./containers/PostsIndex";
 import PostsNew from "./components/PostsNew";
+import PostsShow from "./components/PostsShow";
 
 import registerServiceWorker from "./registerServiceWorker";
 
@@ -22,6 +23,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route path="/posts/new" component={PostsNew} />
+        <Route path="/posts/:id" component={PostsShow} />
         <Route path="/" component={PostsIndex} />
       </Switch>
     </BrowserRouter>
