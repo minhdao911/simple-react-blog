@@ -1,19 +1,29 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { showPost } from "../actions";
+import { showPost, deletePost } from "../actions";
 
 class PostsShow extends Component {
   componentDidMount() {
     this.props.showPost(this.props.match.params.id);
   }
 
+  onDeleteClick = e => {
+    e.preventDefault();
+    this.props.deletePost(this.props.match.params.id, () => {
+      this.props.history.push("/");
+    });
+  };
+
   render() {
     const { post } = this.props;
     if (!post) return <div>Loading...</div>;
     return (
       <div className="container">
-        <Link to="/">Back To Index</Link>
+        <Link to="/">Back To Index</Link>{" "}
+        <a href="" onClick={this.onDeleteClick}>
+          Delete
+        </a>
         <h3>{post.title}</h3>
         <h6>
           <em>{post.categories}</em>
@@ -30,5 +40,5 @@ function mapStateToProps({ posts }, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { showPost }
+  { showPost, deletePost }
 )(PostsShow);
